@@ -1,5 +1,6 @@
 import dp.EditDistance;
 import dp.LCS;
+import matching.KMP;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,5 +9,10 @@ public class Main {
         System.out.println(EditDistance.distance("kitten", "sitting"));
         System.out.println(EditDistance.distance("", "abc"));
         System.out.println(EditDistance.distance("abc", "abc"));
+        System.out.println(KMP.search("abababa", "aba"));
+        System.out.println(KMP.search("abababa", "xyz"));
+        System.out.println(KMP.search("abc", "abcd"));
+        System.out.println(KMP.search("abc", ""));
+        System.out.println(java.util.Arrays.toString(KMP.buildLps("ababaca")));
     }
 }
