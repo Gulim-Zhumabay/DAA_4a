@@ -2,6 +2,8 @@ import dp.EditDistance;
 import dp.LCS;
 import matching.KMP;
 import matching.RabinKarp;
+import suffix.SuffixArray;
+import suffix.Kasai;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,5 +21,9 @@ public class Main {
         System.out.println(RabinKarp.search("abababa", "xyz"));
         System.out.println(RabinKarp.search("abc", "abcd"));
         System.out.println(RabinKarp.search("abc", ""));
+
+        int[] sa = SuffixArray.buildSimple("banana");
+        System.out.println(java.util.Arrays.toString(sa));
+        System.out.println(java.util.Arrays.toString(Kasai.buildLcp("banana", sa)));
     }
 }
