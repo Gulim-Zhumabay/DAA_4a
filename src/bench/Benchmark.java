@@ -20,7 +20,7 @@ public class Benchmark {
     static final String alphabet = "abcd";
     static final long seed = 42;
     static final int runs = 5;
-    static final int warmups = 20;
+    static final int warmups = 100;
     static final int patternLength = 20;
     static long sink = 0;
 
@@ -103,6 +103,17 @@ public class Benchmark {
         }
     }
 
+    static void runWorstCase(List<String> rows) {
+        int[] sizes = {10000, 50000, 100000};
+        for (int n : sizes) {
+            String text = "a".repeat(n);
+            String almost = "a".repeat(patternLength - 1) + "b";
+            String all = "a".repeat(patternLength);
+            measure(rows, "worst_absent", text, almost);
+            measure(rows, "worst_present", text, all);
+        }
+    }
+
     static void runKasai(List<String> rows) {
         int[] sizes = {1000, 5000, 10000};
         Random rnd = new Random(seed);
@@ -133,13 +144,16 @@ public class Benchmark {
         List<String> dpRows = new ArrayList<>();
         List<String> matchRows = new ArrayList<>();
         List<String> kasaiRows = new ArrayList<>();
+        List<String> worstRows = new ArrayList<>();
 
         runDp(dpRows);
         runMatching(matchRows);
         runKasai(kasaiRows);
+        runWorstCase(worstRows);
 
         save("results/dp.csv", "algorithm,n,avg_ms", dpRows);
         save("results/matching.csv", "algorithm,pattern,n,avg_ms,comparisons,collisions,matches", matchRows);
         save("results/kasai.csv", "algorithm,n,avg_ms,comparisons", kasaiRows);
+        save("results/worstcase.csv", "algorithm,pattern,n,avg_ms,comparisons,collisions,matches", worstRows);
     }
 }
