@@ -61,3 +61,21 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(os.path.join(here, "plot_kasai.png"), dpi=150)
 plt.close()
+
+w = read("worstcase.csv")
+fig, axes = plt.subplots(2, 2, figsize=(11, 8))
+for col, kind in enumerate(["worst_absent", "worst_present"]):
+    for row, (value, label) in enumerate([("avg_ms", "average time (ms)"), ("comparisons", "character comparisons")]):
+        ax = axes[row][col]
+        for name in ["Naive", "KMP", "RabinKarp"]:
+            pts = series(w, "algorithm", value, algorithm=name, pattern=kind)
+            ax.plot([p[0] for p in pts], [p[1] for p in pts], marker="o", label=name)
+        ax.set_xlabel("text length n")
+        ax.set_ylabel(label)
+        ax.set_title(kind + ": " + value)
+        ax.grid(True, alpha=0.3)
+axes[0][0].legend()
+fig.suptitle("worst case: text of only 'a'")
+fig.tight_layout()
+fig.savefig(os.path.join(here, "plot_worstcase.png"), dpi=150)
+plt.close(fig)
