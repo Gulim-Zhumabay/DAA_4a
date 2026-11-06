@@ -1,6 +1,7 @@
 import dp.EditDistance;
 import dp.LCS;
 import matching.KMP;
+import matching.RabinKarp;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,5 +15,9 @@ public class Main {
         System.out.println(KMP.search("abc", "abcd"));
         System.out.println(KMP.search("abc", ""));
         System.out.println(java.util.Arrays.toString(KMP.buildLps("ababaca")));
+        System.out.println(RabinKarp.search("abababa", "aba"));
+        System.out.println(RabinKarp.search("abababa", "xyz"));
+        System.out.println(RabinKarp.search("abc", "abcd"));
+        System.out.println(RabinKarp.search("abc", ""));
     }
 }
