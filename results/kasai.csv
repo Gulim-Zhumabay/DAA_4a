@@ -1,0 +1,4 @@
+algorithm,n,avg_ms,comparisons
+Kasai,1000,0.2673,1990
+Kasai,5000,0.4529,9991
+Kasai,10000,0.8220,19988
